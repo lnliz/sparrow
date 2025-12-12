@@ -80,6 +80,13 @@
                 <Region style="-fx-pref-width: 5" />
                 <ToggleButton fx:id="maxButton" text="Max" onAction="#setMaxInput" />
             </Field>
+            <Field text="OP_RETURN:">
+                <TextField fx:id="opReturnData" promptText="Optional">
+                    <tooltip>
+                        <Tooltip text="Optional data to include as OP_RETURN output (UTF-8 text)"/>
+                    </tooltip>
+                </TextField>
+            </Field>
         </Fieldset>
     </Form>
     <Form GridPane.columnIndex="2" GridPane.rowIndex="0">

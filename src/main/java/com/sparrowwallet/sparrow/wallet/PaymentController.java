@@ -112,6 +112,9 @@ public class PaymentController extends WalletFormController implements Initializ
     @FXML
     private Button addPaymentButton;
 
+    @FXML
+    private TextField opReturnData;
+
     private final BooleanProperty emptyAmountProperty = new SimpleBooleanProperty(true);
 
     private final BooleanProperty dustAmountProperty = new SimpleBooleanProperty();
@@ -720,6 +723,16 @@ public class PaymentController extends WalletFormController implements Initializ
         }
     }
 
+    public byte[] getOpReturnData() {
+        if(opReturnData != null && opReturnData.getText() != null) {
+            String trimmed = opReturnData.getText().trim();
+            if(!trimmed.isEmpty()) {
+                return trimmed.getBytes(StandardCharsets.UTF_8);
+            }
+        }
+        return null;
+    }
+
     public void clear() {
         try {
             AppServices.clearPayjoinURI(getRecipientAddress());
@@ -736,6 +749,10 @@ public class PaymentController extends WalletFormController implements Initializ
 
         fiatAmount.setText("");
         setSendMax(false);
+
+        if(opReturnData != null) {
+            opReturnData.setText("");
+        }
 
         dustAmountProperty.set(false);
         consolidationNodeProperty.set(null);

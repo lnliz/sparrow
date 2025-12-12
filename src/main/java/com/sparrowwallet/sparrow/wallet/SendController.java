@@ -605,6 +605,16 @@ public class SendController extends WalletFormController implements Initializabl
         try {
             List<Payment> payments = transactionPayments != null ? transactionPayments : getPayments();
             updateOptimizationButtons(payments);
+
+            opReturnsList.clear();
+            for(Tab tab : paymentTabs.getTabs()) {
+                PaymentController controller = (PaymentController)tab.getUserData();
+                byte[] opReturnData = controller.getOpReturnData();
+                if(opReturnData != null) {
+                    opReturnsList.add(opReturnData);
+                }
+            }
+
             if(!userFeeSet.get() || getFeeValueSats() != null) {
                 Wallet wallet = getWalletForm().getWallet();
                 Long userFee = userFeeSet.get() ? getFeeValueSats() : null;
